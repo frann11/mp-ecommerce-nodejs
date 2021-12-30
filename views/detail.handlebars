@@ -1,3 +1,4 @@
+<script src="https://www.mercadopago.com/v2/security.js" view="detail"></script>
 
 <div class="as-search-wrapper" role="main">
     <div class="as-navtuck-wrapper">
@@ -29,7 +30,7 @@
                     <div class="row as-search-navbar" id="as-search-navbar" style="width: auto;">
                         <div class="as-accessories-filter-tile column large-6 small-3">
 
-                            <button class="as-filter-button" aria-expanded="true" aria-controls="as-search-filters" type="button">
+                            <button class="as-filter-button" aria-expanded="true" aria-controls="as-search-filters" type="button" onclick="window.location.href = 'http://localhost:3000/';">
                                 <h2 class=" as-filter-button-text">
                                     Smartphones
                                 </h2>
@@ -83,8 +84,16 @@
                                 <h3 >
                                     {{ unit }}
                                 </h3>
+                                 
                             </div>
-                            <button type="submit" class="mercadopago-button" formmethod="post">Pagar</button>
+                            <form action="/detail" method="POST">
+                                <input type="hidden" name="img" value="{{img}}">
+                                <input type="hidden" name="title" value="{{title}}">
+                                <input type="hidden" name="price" value="{{price}}">
+                                <input type="hidden" name="url" value="{{url}}">
+                                <input type="hidden" name="unit" value="{{unit}}">
+                                <button type="submit" class="mercadopago-button" formmethod="post"> Pagar producto</button>
+                            </form>
                         </div>
                     </div>
                 </div>
@@ -93,3 +102,16 @@
     </div>
 </div>
    
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11">
+
+</script>
+<script>
+    {{failure}} &&
+    Swal.fire({
+  title: 'Error en el pago',
+  text: 'El pago no pudo ser completado o fue cancelado, por favor intente nuevamente ',
+  icon: 'error',
+  confirmButtonText: 'Continuar'
+}).then(function() {
+    window.location = "/detail?img={{img}}&title={{title}}&price={{price}}&unit={{unit}}";
+})</script>

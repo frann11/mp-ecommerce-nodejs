@@ -1,3 +1,4 @@
+<script src="https://www.mercadopago.com/v2/security.js" view="home"></script>
             <div class="as-search-wrapper" role="main">
                 <div class="as-navtuck-wrapper">
                     <div class="as-l-fullwidth  as-navtuck" data-events="event52">
@@ -511,3 +512,36 @@
                     </div>
                 </div>
             </div>
+
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11">
+
+</script>
+<script>
+    if ('{{success}}' == 'true') {
+    Swal.fire({
+  title: 'Compra exitosa',
+  html: `La compra se ha realizado exitosamente <br><br>
+  id de pago: {{payment_id}}<br>
+  external reference: {{external_reference}}<br>
+  tipo de pago: {{payment_type}}`,
+  icon: 'success',
+  confirmButtonText: 'Continuar'
+}).then(function() {
+    window.location = "/";
+})}
+
+if ('{{pending}}' == 'true'){
+    Swal.fire({
+  title: 'Compra pendiente',
+  html: `La transaccion quedo a espera de realizarse el pago por el medio seleccionado <br>
+  <br>id de pago: {{payment_id}}<br>
+  external reference: {{external_reference}}<br>
+  tipo de pago: {{payment_type}}`,
+  icon: 'info',
+  confirmButtonText: 'Continuar'
+}).then(function() {
+    window.location = "/";
+})
+
+}
+</script>
